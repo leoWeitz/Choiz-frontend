@@ -10,7 +10,7 @@ interface StepProps {
 
 export function Step({ text, lineUpLength = 0, lineDownLength = 0, showTimeIndicator = false, timeText }: StepProps) {
   return (
-    <div className="flex items-center gap-3 relative">
+    <div className="flex items-center gap-5 relative">
       {/* Vertical lines */}
       {lineUpLength > 0 && (
         <div
