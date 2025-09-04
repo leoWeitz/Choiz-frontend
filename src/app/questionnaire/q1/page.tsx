@@ -26,12 +26,12 @@ export default function Question1() {
 
   return (
     <QuestionnaireWrapper config={questionConfig}>
-      <Question1LikeContent formOptions={options}/>
+      <Question1LikeContent title="¿Tienes algún problema en el cuero cabelludo?" formOptions={options}/>
     </QuestionnaireWrapper>
   )
 }
 
-export function Question1LikeContent({formOptions} : {formOptions: FormOption[]}) {
+export function Question1LikeContent({title, formOptions} : {title:string, formOptions: FormOption[]}) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected } = useSelectionContext();
@@ -54,7 +54,7 @@ export function Question1LikeContent({formOptions} : {formOptions: FormOption[]}
     <>
       <div className="mb-8">
           <h2 className="text-2xl font-semibold text-[#3b3345] mb-4 leading-tight">
-            ¿Tienes algún problema en el cuero cabelludo?
+            ${title}
           </h2>
           <p className="text-[#666768] text-base">Selecciona todas las opciones que apliquen.</p>
         </div>

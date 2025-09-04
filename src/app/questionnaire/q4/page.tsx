@@ -3,7 +3,7 @@
 import { QuestionnaireWrapper } from "../layout"
 import { Question1LikeContent } from "../q1/page"
 
-export default function Question3() {
+export default function Question4() {
     const options = [
         { id: "breastCancer", label: "Cáncer de mama" },
         { id: "prostateCancer", label: "Cáncer de próstata" },
@@ -16,8 +16,8 @@ export default function Question3() {
     ]
     
     return(
-        <QuestionnaireWrapper config={{step: 3}}>
-            <Question1LikeContent title="" formOptions={options} />
+        <QuestionnaireWrapper config={{step: 4}}>
+            <Question1LikeContent formOptions={options} />
         </QuestionnaireWrapper>
     )
 }
