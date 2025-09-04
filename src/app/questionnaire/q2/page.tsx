@@ -3,10 +3,12 @@
 import { QuestionOption } from "@/components/QuestionOption"
 import { QuestionnaireWrapper } from "../layout"
 import { useState } from "react"
+import { useSelectionContext } from "../layout"
 
 export default function Question2() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>(["none"])
   const [otherText, setOtherText] = useState("")
+  
 
   const handleOptionChange = (optionId: string) => {
     setSelectedOptions((prev) => {
@@ -32,6 +34,36 @@ export default function Question2() {
 
   return (
     <QuestionnaireWrapper config={questionConfig}>
+      <Question2Content />
+    </QuestionnaireWrapper>
+  )
+}
+
+function Question2Content() {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(["none"])
+  const [otherText, setOtherText] = useState("")
+  const { setIsOptionSelected } = useSelectionContext()
+
+  const handleOptionChange = (optionId: string) => {
+    setSelectedOptions((prev) => {
+      setIsOptionSelected(true)
+      if (optionId === "none") {
+        return ["none"]
+      }
+      const newSelection = [optionId]
+
+      return newSelection.length === 0 ? ["none"] : newSelection
+    })
+  }
+
+  const options = [
+    { id: "no", label: "No" },
+    { id: "yes", label: "Sí" },
+    { id: "idk", label: "No estoy seguro" },
+  ]
+
+  return (
+    <>
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-[#3b3345] mb-4 leading-tight">
           ¿Hay antecedentes de caída del cabello en tu familia?
@@ -49,6 +81,6 @@ export default function Question2() {
           />
         ))}
       </div>
-    </QuestionnaireWrapper>
+    </>
   )
 }

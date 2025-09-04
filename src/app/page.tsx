@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#6042aa] to-[#9f7cf7] flex flex-col">
 
-      {/* Main Content */}
       <div className="relative flex flex-1 flex-col items-center px-6">
-        {/* Profile Image */}
         <div className="w-full max-w-md mb-0 relative">
           <img
             src="/person.png"
@@ -20,7 +18,6 @@ export default function Home() {
           Choiz
           </h1>
         </div>
-        {/* Welcome Card */}
         <div className="bg-white rounded-3xl w-full max-w-md flex-1 p-10 pb-8 space-y-20 z-1">
           <h2 className="text-[#6042aa] text-2xl font-bold mb-2">Bienvenido a Choiz</h2>
 
