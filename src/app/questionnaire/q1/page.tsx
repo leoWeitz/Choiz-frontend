@@ -32,20 +32,24 @@ export default function Question1() {
 }
 
 export function Question1LikeContent({title, formOptions} : {title:string, formOptions: FormOption[]}) {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("response1") ? JSON.parse(localStorage.getItem("response1") || "") : [])
   const [otherText, setOtherText] = useState("")
-  const { setIsOptionSelected } = useSelectionContext();
-
+  const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext();
+  if(selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
+    setSelectedOptions(selectedOptionsLocal)
+    setIsOptionSelected(true)
+  }
   const handleOptionChange = (optionId: string) => {
-    setSelectedOptions((prev) => {
+    setSelectedOptionsLocal((prev) => {
       setIsOptionSelected(true);
       if (optionId === "none") {
         return ["none"]
       }
       const newSelection = prev.includes(optionId)
-        ? prev.filter((id) => id !== optionId)
-        : [...prev.filter((id) => id !== "none"), optionId]
-
+      ? prev.filter((id) => id !== optionId)
+      : [...prev.filter((id) => id !== "none"), optionId]
+      
+      setSelectedOptions(newSelection)
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }
@@ -65,12 +69,12 @@ export function Question1LikeContent({title, formOptions} : {title:string, formO
               key={option.id}
               id={option.id}
               label={option.label}
-              selected={selectedOptions.includes(option.id)}
+              selected={selectedOptionsLocal.includes(option.id)}
               onChange={handleOptionChange}
             />
           ))}
 
-          {selectedOptions.includes("other") && (
+          {selectedOptionsLocal.includes("other") && (
             <div className="mt-4">
               <textarea
                 value={otherText}

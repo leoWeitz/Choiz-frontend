@@ -40,12 +40,12 @@ export default function Question2() {
 }
 
 function Question2Content() {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(["none"])
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(["none"])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected } = useSelectionContext()
 
   const handleOptionChange = (optionId: string) => {
-    setSelectedOptions((prev) => {
+    setSelectedOptionsLocal((prev) => {
       setIsOptionSelected(true)
       if (optionId === "none") {
         return ["none"]
@@ -76,7 +76,7 @@ function Question2Content() {
             key={option.id}
             id={option.id}
             label={option.label}
-            selected={selectedOptions.includes(option.id)}
+            selected={selectedOptionsLocal.includes(option.id)}
             onChange={handleOptionChange}
           />
         ))}

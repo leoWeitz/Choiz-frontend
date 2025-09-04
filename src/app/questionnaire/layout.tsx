@@ -19,7 +19,9 @@ interface QuestionnaireLayoutProps {
 
 type selectionContextType = {
   isOptionSelected: boolean,
-  setIsOptionSelected: (value: boolean) => void
+  setIsOptionSelected: (value: boolean) => void,
+  selectedOptions: string[],
+  setSelectedOptions: (value: string[]) => void,
 }
 
 const SelectionContext = createContext<selectionContextType | null>(null);
@@ -53,6 +55,7 @@ export function QuestionnaireWrapper({
   const router = useRouter()
   const progress = (config.step / 6) * 100
   const [isOptionSelected, setIsOptionSelected] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
   const handleBack = () => {
     if (config.backUrl) {
@@ -69,6 +72,7 @@ export function QuestionnaireWrapper({
   }
 
   const handleContinue = () => {
+    localStorage.setItem(`response${config.step}`, JSON.stringify(selectedOptions))
     if (config.onContinue) {
       config.onContinue()
     } else if (config.nextUrl) {
@@ -81,7 +85,7 @@ export function QuestionnaireWrapper({
   }
 
   return (
-    <SelectionContext.Provider value={{ isOptionSelected, setIsOptionSelected }}>
+    <SelectionContext.Provider value={{ isOptionSelected, setIsOptionSelected, selectedOptions, setSelectedOptions }}>
       <QuestionnaireHeader onBack={handleBack} onWhatsApp={handleWhatsApp} />
       <ProgressBar progress={progress} />
       <div className="flex-1 px-4">{children}</div>
