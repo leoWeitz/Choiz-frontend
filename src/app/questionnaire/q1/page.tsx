@@ -5,20 +5,33 @@ import { QuestionnaireWrapper } from "../layout"
 import { useState } from "react"
 import { useSelectionContext } from "../layout"
 
+export type FormOption = {
+  id: string,
+  label: string
+}
+
 export default function Question1() {
 
   const questionConfig = {
     step: 1,
   }
+  const options = [
+    { id: "pain", label: "Dolor repentino y/o enrojecimiento" },
+    { id: "dandruff", label: "Caspa" },
+    { id: "psoriasis", label: "Psoriasis" },
+    { id: "sunburn", label: "Quemadura de sol" },
+    { id: "other", label: "Otro" },
+    { id: "none", label: "No, ninguno de los anteriores" },
+  ]
 
   return (
     <QuestionnaireWrapper config={questionConfig}>
-      <Question1Content />
+      <Question1LikeContent formOptions={options}/>
     </QuestionnaireWrapper>
   )
 }
 
-function Question1Content() {
+export function Question1LikeContent({formOptions} : {formOptions: FormOption[]}) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected } = useSelectionContext();
@@ -36,15 +49,6 @@ function Question1Content() {
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }
-
-  const options = [
-    { id: "pain", label: "Dolor repentino y/o enrojecimiento" },
-    { id: "dandruff", label: "Caspa" },
-    { id: "psoriasis", label: "Psoriasis" },
-    { id: "sunburn", label: "Quemadura de sol" },
-    { id: "other", label: "Otro" },
-    { id: "none", label: "No, ninguno de los anteriores" },
-  ]
   
   return (
     <>
@@ -56,7 +60,7 @@ function Question1Content() {
         </div>
 
         <div className="space-y-3 mb-8">
-          {options.map((option) => (
+          {formOptions.map((option) => (
             <QuestionOption
               key={option.id}
               id={option.id}
