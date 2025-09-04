@@ -54,7 +54,7 @@ export function Question1LikeContent({title, formOptions} : {title:string, formO
     <>
       <div className="mb-8">
           <h2 className="text-2xl font-semibold text-[#3b3345] mb-4 leading-tight">
-            ${title}
+            {title}
           </h2>
           <p className="text-[#666768] text-base">Selecciona todas las opciones que apliquen.</p>
         </div>

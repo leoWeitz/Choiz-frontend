@@ -5,19 +5,18 @@ import { Question1LikeContent } from "../q1/page"
 
 export default function Question4() {
     const options = [
-        { id: "breastCancer", label: "Cáncer de mama" },
-        { id: "prostateCancer", label: "Cáncer de próstata" },
-        { id: "lowPressure", label: "Presión arterial baja incontrolada" },
-        { id: "otherDisease", label: "Otras enfermedades autoinmunes o reumáticas" },
-        { id: "thiroide", label: "Problemas de tiroides" },
-        { id: "heart", label: "Enfermedades del corazón" },
-        { id: "liver", label: "Enfermedades del riñón o hígado" },
-        { id: "none", label: "No, ninguna de las anteriores" },
+        { id: "depression", label: "Depresión" },
+        { id: "bipolarDisorder", label: "Desorden de bipolaridad" },
+        { id: "anxiety", label: "Ansiedad" },
+        { id: "panicAttacks", label: "Ataques de pánico" },
+        { id: "ptsd", label: "Desorden de estrés postraumático" },
+        { id: "schizophrenia", label: "Esquizofrenia" },
+        { id: "none", label: "No, ninguno de los anteriores" },
     ]
     
     return(
         <QuestionnaireWrapper config={{step: 4}}>
-            <Question1LikeContent formOptions={options} />
+            <Question1LikeContent title="¿Tienes o has tenido alguna de las siguientes condiciones de salud mental?" formOptions={options} />
         </QuestionnaireWrapper>
     )
 }
