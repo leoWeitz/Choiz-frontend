@@ -5,6 +5,7 @@ import { QuestionnaireWrapper } from "../layout"
 import LightBox from "@/components/LightBox"
 import FAQitem from "@/components/FAQitem"
 import ContinueButton from "@/components/ContinueButton"
+import { useRouter } from "next/navigation"
 
 type itemType = {
     question: string,
@@ -17,6 +18,7 @@ export default function RecommendationPage() {
         { id:"D-g", title: "DUTAXIDIL® Gel", subtitle: "Dutasterida 0.1% + Minoxidil 5 % + Tretinoína 1% + Hidrocortisona 1%", img:"/D-gel.png"},
         { id:"M-c", title: "Minoxidil® Cápsulas", subtitle: "Minoxidil 2.5 mg + Biotina 2.5 mg", img:"/D-capsulas.png"},
     ]
+    const router = useRouter()
     const [pregunta3Index, setPregunta3Index] = useState<number>(0)
     const [wereAllQanswered, setWereAllQAnswered] = useState(false)
 
@@ -35,6 +37,7 @@ export default function RecommendationPage() {
     useEffect(() => {
     function getPregunta3Index(): number {
         if (!localStorage.getItem("pregunta1") || !localStorage.getItem("pregunta2") || !localStorage.getItem("pregunta3") || !localStorage.getItem("pregunta4") ) {
+            console.log(localStorage.getItem("pregunta1"), localStorage.getItem("pregunta2"), localStorage.getItem("pregunta3"), localStorage.getItem("pregunta4"))
             setWereAllQAnswered(false)
             return 0
         }
@@ -93,7 +96,7 @@ export default function RecommendationPage() {
                     <h2 className="text-2xl font-bold text-[#3b3345] leading-tight">{recommendations[pregunta3Index].title}</h2>
                     <p className="text-[#666768] text-base">{recommendations[pregunta3Index].subtitle}</p>
                     <img src={recommendations[pregunta3Index].img} alt={recommendations[pregunta3Index].title} className="mx-auto max-w-52 h-auto"/>
-                    <ContinueButton text="Seleccionar" disabled={false}/>
+                    <ContinueButton text="Seleccionar" disabled={false} onClick={() => {router.push("/questionnaire/endPage")}}/>
                 </div>
             </LightBox>
 

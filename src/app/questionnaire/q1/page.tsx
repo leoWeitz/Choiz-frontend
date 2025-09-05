@@ -35,13 +35,14 @@ export function Question1LikeContent({title, formOptions, step} : {title:string,
   const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem(`pregunta${step}`) ? JSON.parse(localStorage.getItem(`pregunta${step}`) || "") : [])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext();
-  if(selectedOptionsLocal.length > 0) {
-    setSelectedOptions(selectedOptionsLocal)
-    setIsOptionSelected(true)
-  }
+  useEffect(() => {
+    if (selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
+      setSelectedOptions(selectedOptionsLocal)
+      setIsOptionSelected(true)
+    }
+  }, [selectedOptions, selectedOptionsLocal, setSelectedOptions, setIsOptionSelected])
   const handleOptionChange = (optionId: string) => {
     setSelectedOptionsLocal((prev) => {
-      setIsOptionSelected(true);
       if (optionId === "none") {
         localStorage.setItem(`pregunta${step}`, JSON.stringify(["none"]))
         return ["none"]

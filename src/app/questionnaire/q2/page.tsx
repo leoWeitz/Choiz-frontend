@@ -6,21 +6,7 @@ import { useEffect, useState } from "react"
 import { useSelectionContext } from "../layout"
 
 export default function Question2() {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(["none"])
-  const [otherText, setOtherText] = useState("")
-  
 
-  const handleOptionChange = (optionId: string) => {
-    setSelectedOptions((prev) => {
-      if (optionId === "none") {
-        return ["none"]
-      }
-
-      const newSelection = [optionId]
-
-      return newSelection.length === 0 ? ["none"] : newSelection
-    })
-  }
 
   const options = [
     { id: "no", label: "No" },
@@ -40,7 +26,7 @@ export default function Question2() {
 }
 
 function Question2Content() {
-  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("respuesta2") ? JSON.parse(localStorage.getItem("respuesta2") || "") : [])
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("pregunta2") ? JSON.parse(localStorage.getItem("pregunta2") || "") : [])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext()
   useEffect(() => {
@@ -51,7 +37,7 @@ function Question2Content() {
   }, [selectedOptions, selectedOptionsLocal, setSelectedOptions, setIsOptionSelected])
   
   const handleOptionChange = (optionId: string) => {
-    localStorage.setItem(`respuesta2`, JSON.stringify(optionId))
+    localStorage.setItem(`pregunta2`, JSON.stringify(optionId))
     setSelectedOptionsLocal((prev) => {
       setIsOptionSelected(true)
       if (optionId === "none") {
