@@ -18,6 +18,7 @@ export default function RecommendationPage() {
         { id:"M-c", title: "Minoxidil® Cápsulas", subtitle: "Minoxidil 2.5 mg + Biotina 2.5 mg", img:"/D-capsulas.png"},
     ]
     const [pregunta3Index, setPregunta3Index] = useState<number>(0)
+    const [wereAllQanswered, setWereAllQAnswered] = useState(false)
 
     const [items, setItems] = useState<any>()
         useEffect(() => {
@@ -33,6 +34,12 @@ export default function RecommendationPage() {
 
     useEffect(() => {
     function getPregunta3Index(): number {
+        if (!localStorage.getItem("pregunta1") || !localStorage.getItem("pregunta2") || !localStorage.getItem("pregunta3") || !localStorage.getItem("pregunta4") ) {
+            setWereAllQAnswered(false)
+            return 0
+        }
+        
+        setWereAllQAnswered(true)
         const stored = localStorage.getItem("pregunta3")
         
         if (!stored) return 0
@@ -60,6 +67,17 @@ export default function RecommendationPage() {
 
     if (!items || items.length === 0) {
         return <div>Cargando FAQs...</div>
+    }
+    else if (!wereAllQanswered) {
+        return (
+            <QuestionnaireWrapper config={{step: 5}}>
+                <div className="mb-8">
+                    <h2 className="text-2xl font-semibold text-[#3b3345] mb-4 leading-tight">
+                    Por favor, responde todas las preguntas para ver tu recomendación personalizada.
+                    </h2>
+                </div>
+            </QuestionnaireWrapper>
+        )
     }
 
     return (
