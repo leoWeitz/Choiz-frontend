@@ -2,7 +2,7 @@
 
 import { QuestionOption } from "@/components/QuestionOption"
 import { QuestionnaireWrapper } from "../layout"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelectionContext } from "../layout"
 
 export type FormOption = {
@@ -54,6 +54,12 @@ export function Question1LikeContent({title, formOptions, step} : {title:string,
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }
+
+  useEffect(() => {
+    if (selectedOptionsLocal.includes("other")) {
+        localStorage.setItem(`pregunta${step}Other`, otherText)
+    }
+  }, [otherText])
   
   return (
     <>
