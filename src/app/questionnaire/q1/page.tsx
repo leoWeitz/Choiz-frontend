@@ -26,16 +26,16 @@ export default function Question1() {
 
   return (
     <QuestionnaireWrapper config={questionConfig}>
-      <Question1LikeContent title="¿Tienes algún problema en el cuero cabelludo?" formOptions={options}/>
+      <Question1LikeContent title="¿Tienes algún problema en el cuero cabelludo?" formOptions={options} step={1}/>
     </QuestionnaireWrapper>
   )
 }
 
-export function Question1LikeContent({title, formOptions} : {title:string, formOptions: FormOption[]}) {
-  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("response1") ? JSON.parse(localStorage.getItem("response1") || "") : [])
+export function Question1LikeContent({title, formOptions, step} : {title:string, formOptions: FormOption[], step:number}) {
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem(`pregunta${step}`) ? JSON.parse(localStorage.getItem(`pregunta${step}`) || "") : [])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext();
-  if(selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
+  if(selectedOptionsLocal.length > 0) {
     setSelectedOptions(selectedOptionsLocal)
     setIsOptionSelected(true)
   }
@@ -48,6 +48,7 @@ export function Question1LikeContent({title, formOptions} : {title:string, formO
       const newSelection = prev.includes(optionId)
       ? prev.filter((id) => id !== optionId)
       : [...prev.filter((id) => id !== "none"), optionId]
+      localStorage.setItem(`pregunta${step}`, JSON.stringify(newSelection))
       
       setSelectedOptions(newSelection)
       return newSelection.length === 0 ? ["none"] : newSelection

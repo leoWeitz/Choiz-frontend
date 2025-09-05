@@ -30,7 +30,7 @@ export default function Home() {
           </div>
           <div className="mt-30">
             <Link href="/questionnaire/q1">
-              <ContinueButton/>
+              <ContinueButton text="Continuar" disabled={false}/>
             </Link>
           </div>
         </div>

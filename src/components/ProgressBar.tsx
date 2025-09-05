@@ -1,5 +1,5 @@
 interface ProgressBarProps {
-    progress: number // 0-100
+    progress: number
   }
   
   export function ProgressBar({ progress }: ProgressBarProps) {

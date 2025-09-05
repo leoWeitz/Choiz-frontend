@@ -17,7 +17,7 @@ export default function Question3() {
     
     return(
         <QuestionnaireWrapper config={{step: 3}}>
-            <Question1LikeContent title="¿Tienes o has tenido alguna de las siguientes condiciones médicas?" formOptions={options} />
+            <Question1LikeContent title="¿Tienes o has tenido alguna de las siguientes condiciones médicas?" formOptions={options} step={3}/>
         </QuestionnaireWrapper>
     )
 }

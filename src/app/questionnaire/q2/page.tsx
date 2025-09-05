@@ -40,18 +40,22 @@ export default function Question2() {
 }
 
 function Question2Content() {
-  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(["none"])
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("respuesta2") ? JSON.parse(localStorage.getItem("respuesta2") || "") : [])
   const [otherText, setOtherText] = useState("")
-  const { setIsOptionSelected } = useSelectionContext()
-
+  const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext()
+  if(selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
+    setSelectedOptions(selectedOptionsLocal)
+    setIsOptionSelected(true)
+  }
   const handleOptionChange = (optionId: string) => {
+    localStorage.setItem(`respuesta2`, JSON.stringify(selectedOptions))
     setSelectedOptionsLocal((prev) => {
       setIsOptionSelected(true)
       if (optionId === "none") {
         return ["none"]
       }
       const newSelection = [optionId]
-
+      setSelectedOptions(newSelection)
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }

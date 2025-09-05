@@ -5,6 +5,7 @@ import { createContext, useState, useContext} from "react"
 import { QuestionnaireHeader } from "@/components/QuestionnaireHeader"
 import { ProgressBar } from "@/components/ProgressBar"
 import { useRouter } from "next/navigation"
+import ContinueButton from "@/components/ContinueButton"
 
 interface QuestionnaireConfig {
   step: number
@@ -72,7 +73,6 @@ export function QuestionnaireWrapper({
   }
 
   const handleContinue = () => {
-    localStorage.setItem(`response${config.step}`, JSON.stringify(selectedOptions))
     if (config.onContinue) {
       config.onContinue()
     } else if (config.nextUrl) {
@@ -90,15 +90,14 @@ export function QuestionnaireWrapper({
       <ProgressBar progress={progress} />
       <div className="flex-1 px-4">{children}</div>
       <div className="p-4">
-        <button
-          className={`w-full bg-[#292929] text-white py-4 rounded-2xl text-lg font-medium hover:bg-[#3b3345] transition-colors disabled:bg-gray-400 disabled:text-gray-200
-            `}
+        { config.step < 5 &&
+        <ContinueButton
+          text="Continuar"
           disabled={!isOptionSelected}
-          
           onClick={handleContinue}
         >
-          Continuar
-        </button>
+        </ContinueButton>
+        }
       </div>
     </SelectionContext.Provider>
   )

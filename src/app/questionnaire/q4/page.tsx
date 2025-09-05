@@ -15,8 +15,8 @@ export default function Question4() {
     ]
     
     return(
-        <QuestionnaireWrapper config={{step: 4}}>
-            <Question1LikeContent title="¿Tienes o has tenido alguna de las siguientes condiciones de salud mental?" formOptions={options} />
+        <QuestionnaireWrapper config={{step: 4, nextUrl: "/questionnaire/recommendation"}}>
+            <Question1LikeContent title="¿Tienes o has tenido alguna de las siguientes condiciones de salud mental?" formOptions={options} step={4}/>
         </QuestionnaireWrapper>
     )
 }
