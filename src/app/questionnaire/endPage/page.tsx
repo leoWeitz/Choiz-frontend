@@ -70,9 +70,9 @@ function EndPageContent() {
         setQ2Answer(localStorage.getItem("pregunta2") ? JSON.parse(localStorage.getItem("pregunta2") || "") : "")
         setQ3Answers(localStorage.getItem("pregunta3") ? JSON.parse(localStorage.getItem("pregunta3") || "") : [])
         setQ4Answers(localStorage.getItem("pregunta4") ? JSON.parse(localStorage.getItem("pregunta4") || "") : [])
-        setQ1OtherText(localStorage.getItem("pregunta1OtherText") || "")
-        setQ3OtherText(localStorage.getItem("pregunta3OtherText") || "")
-        setQ4OtherText(localStorage.getItem("pregunta4OtherText") || "")
+        setQ1OtherText(localStorage.getItem("pregunta1Other") || "")
+        setQ3OtherText(localStorage.getItem("pregunta3Other") || "")
+        setQ4OtherText(localStorage.getItem("pregunta4Other") || "")
     }, [])
 
     if (!wereAllQanswered) {
@@ -99,7 +99,7 @@ function EndPageContent() {
                     <FAQitem question="¿Tienes algún problema en el cuero cabelludo?" answer={
                             q1answers
                             .map(ans => {
-                                if (ans === "other") return q1otherText
+                                if (ans === "other") return "Otro: " + q1otherText
                                 const found = options1.find(opt => opt.id === ans)
                                 return found ? found.label : ans
                             })

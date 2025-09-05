@@ -39,12 +39,10 @@ function Question2Content() {
   const handleOptionChange = (optionId: string) => {
     localStorage.setItem(`pregunta2`, JSON.stringify(optionId))
     setSelectedOptionsLocal((prev) => {
-      setIsOptionSelected(true)
       if (optionId === "none") {
         return ["none"]
       }
       const newSelection = [optionId]
-      setSelectedOptions(newSelection)
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }

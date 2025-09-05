@@ -51,7 +51,6 @@ export function Question1LikeContent({title, formOptions, step} : {title:string,
       ? prev.filter((id) => id !== optionId)
       : [...prev.filter((id) => id !== "none"), optionId]
       localStorage.setItem(`pregunta${step}`, JSON.stringify(newSelection))
-      setSelectedOptions(newSelection)
       return newSelection.length === 0 ? ["none"] : newSelection
     })
   }
