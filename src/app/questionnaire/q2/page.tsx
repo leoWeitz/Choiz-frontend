@@ -2,7 +2,7 @@
 
 import { QuestionOption } from "@/components/QuestionOption"
 import { QuestionnaireWrapper } from "../layout"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelectionContext } from "../layout"
 
 export default function Question2() {
@@ -43,12 +43,15 @@ function Question2Content() {
   const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("respuesta2") ? JSON.parse(localStorage.getItem("respuesta2") || "") : [])
   const [otherText, setOtherText] = useState("")
   const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext()
-  if(selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
-    setSelectedOptions(selectedOptionsLocal)
-    setIsOptionSelected(true)
-  }
+  useEffect(() => {
+    if (selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
+      setSelectedOptions(selectedOptionsLocal)
+      setIsOptionSelected(true)
+    }
+  }, [selectedOptions, selectedOptionsLocal, setSelectedOptions, setIsOptionSelected])
+  
   const handleOptionChange = (optionId: string) => {
-    localStorage.setItem(`respuesta2`, JSON.stringify(selectedOptions))
+    localStorage.setItem(`respuesta2`, JSON.stringify(optionId))
     setSelectedOptionsLocal((prev) => {
       setIsOptionSelected(true)
       if (optionId === "none") {
