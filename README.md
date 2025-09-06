@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Choiz-Frontend
 
-## Getting Started
+> Esta es una página web construida con Next.js que permite a los usuarios completar un formulario relacionado con su salud y recibir una recomendación en base a su historial.
 
-First, run the development server:
+---
 
+## Demo en línea
+
+El proyecto está desplegado en Vercel y se puede visitar aquí:  
+[https://choiz-frontend-pjpbgef5k-leoweitzs-projects.vercel.app/](https://choiz-frontend-pjpbgef5k-leoweitzs-projects.vercel.app/)
+
+---
+
+## Requisitos previos
+
+Para poder correr el proyecto en un ambiente local es necesario tener instalado:  
+
+- [Node.js](https://nodejs.org/)  
+- [npm](https://www.npmjs.com/)  
+
+---
+
+## Clonar el proyecto
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:leoWeitz/Choiz-frontend.git
+cd choiz-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalar dependencias
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Ejecutar el proyecto localmente
+```bash
+npm run dev
+```
+Luego abrir http://localhost:3000 en el navegador
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Construir para producción
+Para generar la versión optimizada para producción correr:
+```bash
+npm run build
+npm start
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notas
+El proyecto está desarrollado usando Next.js, React y Tailwind CSS.
