@@ -1,18 +1,11 @@
 "use client"
 
 import { QuestionOption } from "@/components/QuestionOption"
-import { QuestionnaireWrapper } from "../layout"
+import { QuestionnaireWrapper } from "../questionnaireWrapper"
 import { useEffect, useState } from "react"
-import { useSelectionContext } from "../layout"
+import { useSelectionContext } from "../selectionContext"
 
 export default function Question2() {
-
-
-  const options = [
-    { id: "no", label: "No" },
-    { id: "yes", label: "Sí" },
-    { id: "idk", label: "No estoy seguro" },
-  ]
 
   const questionConfig = {
     step: 2,
@@ -26,19 +19,26 @@ export default function Question2() {
 }
 
 function Question2Content() {
-  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(localStorage.getItem("pregunta2") ? JSON.parse(localStorage.getItem("pregunta2") || "") : [])
-  const [otherText, setOtherText] = useState("")
+  const [selectedOptionsLocal, setSelectedOptionsLocal] = useState<string[]>(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(`pregunta2`)
+      return stored ? JSON.parse(stored) : []
+    }
+    return []
+  })  
   const { setIsOptionSelected, setSelectedOptions, selectedOptions } = useSelectionContext()
+  
   useEffect(() => {
     if (selectedOptions.length === 0 && selectedOptionsLocal.length > 0) {
       setSelectedOptions(selectedOptionsLocal)
       setIsOptionSelected(true)
     }
+    localStorage.setItem(`pregunta2`, JSON.stringify(selectedOptionsLocal))
+    console.log(localStorage.getItem(`pregunta2`))
   }, [selectedOptions, selectedOptionsLocal, setSelectedOptions, setIsOptionSelected])
   
   const handleOptionChange = (optionId: string) => {
-    localStorage.setItem(`pregunta2`, JSON.stringify(optionId))
-    setSelectedOptionsLocal((prev) => {
+    setSelectedOptionsLocal(() => {
       if (optionId === "none") {
         return ["none"]
       }

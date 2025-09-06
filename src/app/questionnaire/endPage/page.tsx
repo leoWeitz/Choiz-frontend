@@ -1,7 +1,7 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
-import { QuestionnaireWrapper } from "../layout"
+import { useEffect, useState } from "react"
+import { QuestionnaireWrapper } from "../questionnaireWrapper"
 import LightBox from "@/components/LightBox"
 import FAQitem from "@/components/FAQitem"
 
@@ -15,12 +15,10 @@ export default function EndPage() {
 
 function EndPageContent() {
     const [q1answers, setQ1Answers] = useState<string[]>([])
-    const [q2answer, setQ2Answer] = useState<string>("")
+    const [q2answer, setQ2Answer] = useState<string[]>([])
     const [q3answers, setQ3Answers] = useState<string[]>([])
     const [q4answers, setQ4Answers] = useState<string[]>([])
     const [q1otherText, setQ1OtherText] = useState<string>("")
-    const [q3otherText, setQ3OtherText] = useState<string>("")
-    const [q4otherText, setQ4OtherText] = useState<string>("")
     const [wereAllQanswered, setWereAllQAnswered] = useState(false)
 
     const options1 = [
@@ -67,12 +65,10 @@ function EndPageContent() {
         }
         setWereAllQAnswered(true)
         setQ1Answers(localStorage.getItem("pregunta1") ? JSON.parse(localStorage.getItem("pregunta1") || "") : [])
-        setQ2Answer(localStorage.getItem("pregunta2") ? JSON.parse(localStorage.getItem("pregunta2") || "") : "")
         setQ3Answers(localStorage.getItem("pregunta3") ? JSON.parse(localStorage.getItem("pregunta3") || "") : [])
         setQ4Answers(localStorage.getItem("pregunta4") ? JSON.parse(localStorage.getItem("pregunta4") || "") : [])
+        setQ2Answer(localStorage.getItem("pregunta2") ? JSON.parse(localStorage.getItem("pregunta2") || "") : [])
         setQ1OtherText(localStorage.getItem("pregunta1Other") || "")
-        setQ3OtherText(localStorage.getItem("pregunta3Other") || "")
-        setQ4OtherText(localStorage.getItem("pregunta4Other") || "")
     }, [])
 
     if (!wereAllQanswered) {
@@ -106,12 +102,16 @@ function EndPageContent() {
                             .join(", ") || "No respondido"
                         } isLastItem={false}/>
                     <FAQitem question="¿Hay antecedentes de caída del cabello en tu familia?" answer={
-                            options2.find(opt => opt.id === q2answer)?.label || "No respondido"
+                            q2answer
+                            .map(ans => {
+                                const found = options2.find(opt => opt.id === ans)
+                                return found ? found.label : ans
+                            })
+                            .join(", ") || "No respondido"                        
                         } isLastItem={false}/>
                     <FAQitem question="¿Tienes o has tenido alguna de las siguientes condiciones médicas?" answer={
                             q3answers
                             .map(ans => {
-                                if (ans === "other") return q1otherText
                                 const found = options3.find(opt => opt.id === ans)
                                 return found ? found.label : ans
                             })
@@ -120,7 +120,6 @@ function EndPageContent() {
                     <FAQitem question="¿Tienes o has tenido alguna de las siguientes condiciones de salud mental?" answer={
                             q4answers
                             .map(ans => {
-                                if (ans === "other") return q1otherText
                                 const found = options4.find(opt => opt.id === ans)
                                 return found ? found.label : ans
                             })

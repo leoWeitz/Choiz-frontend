@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Step } from "@/components/Step";
 import ContinueButton from "@/components/ContinueButton";
+import Image from "next/image";
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
 "use client"
 
-import { QuestionnaireWrapper } from "../layout"
-import { Question1LikeContent } from "../q1/page"
+import { QuestionnaireWrapper } from "../questionnaireWrapper"
+import { Question1LikeContent } from "../q1/question1LikeContent"
 
 export default function Question3() {
     const options = [

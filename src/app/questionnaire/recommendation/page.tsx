@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { QuestionnaireWrapper } from "../layout"
+import { QuestionnaireWrapper } from "../questionnaireWrapper"
 import LightBox from "@/components/LightBox"
 import FAQitem from "@/components/FAQitem"
 import ContinueButton from "@/components/ContinueButton"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 type itemType = {
     question: string,
@@ -22,7 +23,7 @@ export default function RecommendationPage() {
     const [pregunta3Index, setPregunta3Index] = useState<number>(0)
     const [wereAllQanswered, setWereAllQAnswered] = useState(false)
 
-    const [items, setItems] = useState<any>()
+    const [items, setItems] = useState<itemType[]>()
         useEffect(() => {
             const fetchData = async () => {
                 const res = await fetch("https://679938bebe2191d708b25ceb.mockapi.io/api/faqs")
