@@ -7,7 +7,7 @@
 ## Demo en línea
 
 El proyecto está desplegado en Vercel y se puede visitar aquí:  
-[https://choiz-frontend-pjpbgef5k-leoweitzs-projects.vercel.app/](https://choiz-frontend-pjpbgef5k-leoweitzs-projects.vercel.app/)
+[https://choiz-frontend.vercel.app/](https://choiz-frontend.vercel.app/)
 
 ---
 
