@@ -96,7 +96,7 @@ export default function RecommendationPage() {
                 <div>
                     <h2 className="text-2xl font-bold text-[#3b3345] leading-tight">{recommendations[pregunta3Index].title}</h2>
                     <p className="text-[#666768] text-base">{recommendations[pregunta3Index].subtitle}</p>
-                    <img src={recommendations[pregunta3Index].img} alt={recommendations[pregunta3Index].title} className="mx-auto max-w-52 h-auto"/>
+                    <img src={recommendations[pregunta3Index].img} alt={recommendations[pregunta3Index].title} className="mx-auto h-auto"/>
                     <ContinueButton text="Seleccionar" disabled={false} onClick={() => {router.push("/questionnaire/endPage")}}/>
                 </div>
             </LightBox>
